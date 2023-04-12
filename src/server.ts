@@ -30,8 +30,8 @@ const checkAvailability = (
 		return;
 	}
 
-	const requestStartDate = dateFns.parseISO(dataInicial!);
-	const requestEndDate = dateFns.parseISO(dataFinal!);
+	const requestStartDate = dateFns.parseISO(dataInicial);
+	const requestEndDate = dateFns.parseISO(dataFinal);
 
 	const areOverlappingDate = rentalList.some((rental) => {
 		return dateFns.areIntervalsOverlapping(
@@ -55,7 +55,7 @@ const checkAvailability = (
 	}
 
 	const car = carsModels.find(
-		(car) => car.model.toLowerCase().trim() === modelo?.toLowerCase().trim()!
+		(car) => car.model.toLowerCase().trim() === modelo.toLowerCase().trim()
 	);
 
 	if (!car) {
@@ -66,13 +66,13 @@ const checkAvailability = (
 	const value = dateFns.differenceInHours(requestEndDate, requestStartDate);
 
 	rentalList.push({
-		cpf: cpf!,
+		model: car,
+		cpf: cpf,
 		startDate: requestStartDate,
 		endDate: requestEndDate,
-		model: car,
 	});
 
-	callback(null, { disponibilidade: true, valor: car!.value * value });
+	callback(null, { disponibilidade: true, valor: car.value * value });
 	return;
 };
 
