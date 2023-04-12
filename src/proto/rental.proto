@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package rentalCarsPackage;
+
+message RentalRequest {
+  string data_inicial = 1;
+  string data_final = 2;
+  string modelo = 3;
+  string cpf = 4;
+}
+
+message RentalResponse {
+  bool disponibilidade = 1;
+  float valor = 2;
+}
+
+service RentalService {
+  rpc CheckAvailability(RentalRequest) returns (RentalResponse) {}
+}
